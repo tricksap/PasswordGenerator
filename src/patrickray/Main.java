@@ -1,6 +1,8 @@
 package patrickray;
 
 import java.security.SecureRandom;
+import java.sql.SQLOutput;
+import java.util.Scanner;
 
 public class Main
 {
@@ -13,10 +15,45 @@ public class Main
 
     public static void main(String[] args)
     {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("--------------------");
+        System.out.println("PASSWORD GENERATOR");
+        System.out.println("--------------------");
+        System.out.println("1.UpperCase + LowerCase Character\n2.UpperCase + LowerCase Character + Numeric\n3.UpperCase + LowerCase Character + Numeric + Special Character");
+        System.out.print("Choice:");
+        int choice = scanner.nextInt();
 
+        int len;
+        switch (choice)
+        {
+            case 1:
+                System.out.print("Length of Password:");
+                len = scanner.nextInt();
+                System.out.println(generatePassword(len,CHAR+CHAR_CAPS));
+                break;
+            case 2:
+                System.out.print("Length of Password:");
+                len = scanner.nextInt();
+                System.out.println(generatePassword(len,CHAR+CHAR_CAPS+NUMERIC));
+                break;
+            case 3:
+                System.out.print("Length of Password:");
+                len = scanner.nextInt();
+                System.out.println(generatePassword(len,CHAR+CHAR_CAPS+NUMERIC+SPECIAL_CHARS));
+                break;
+            default:
+                System.out.println("Invalid Choice");
+                break;
+        }
     }
-    public static String generatePassword()
+    public static String generatePassword(int len, String combi)
     {
-
+        String password = "";
+        for(int i = 0; i<len; i++)
+        {
+            int index = random.nextInt(combi.length());
+            password += combi.charAt(index);
+        }
+        return password;
     }
 }
